@@ -26,7 +26,7 @@ These settings will tell the `puller` to pull the images [alpine](https://hub.do
 ### Install with Helm
 #### Add helm repo
 ```sh
-helm repo add locnh https://github.com/locnh/k8s-puller
+helm repo add locnh https://locnh.github.io/k8s-puller
 ```
 
 #### Install / Upgrade the chart
