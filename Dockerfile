@@ -1,4 +1,4 @@
-FROM docker:stable
+FROM alpinelinux/docker-cli
 
 RUN apk add --update --no-cache python3
 RUN python3 -m ensurepip

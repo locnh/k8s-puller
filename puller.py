@@ -3,17 +3,27 @@
 import schedule
 import time
 import os
-from os import system
 
 images   = os.getenv('IMAGES').split(',')
 interval = int(os.getenv('INTERVAL', 60))
 
-def pull():
-    print("Pulling images ...")
-    for image in images:
-        system("""/usr/local/bin/docker pull %s""" % image)
+def pull(run_once):
+    print("Start pulling ...")
+    try:
+        for image in images:
+            print("Pulling image %s" % image)
+            os.system("docker pull %s" % image)
+            print()
+    except:
+        import traceback
+        print(traceback.format_exc())
+        return schedule.CancelJob
 
-schedule.every(interval).minutes.do(pull)
+    if run_once == True:
+        return schedule.CancelJob
+
+schedule.every().second.do(pull, True)
+schedule.every(interval).minutes.do(pull, False)
 
 while True:
     schedule.run_pending()
