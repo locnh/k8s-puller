@@ -6,7 +6,7 @@ These are the Docker Hub autobuild images located [here](https://hub.docker.com/
 ## Parameters
 
 | Parameter | Description | Type | Default |
-|-----|-----|-----|-----|-----|
+|-----|-----|-----|-----|
 | `puller.images` | `List` of images to be pulled | `List` | `[alpine]` |
 | `puller.interval` | Time interval in minutes | `Int` | `60` |
 
