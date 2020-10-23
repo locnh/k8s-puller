@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: {{ include "puller.fullname" . }}
-        image: locnh/k8s-puller
+        image: locnh/k8s-puller:{{ .Chart.AppVersion }}
         env:
         - name: IMAGES
           value: {{ join "," .Values.puller.images | quote }}
