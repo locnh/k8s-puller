@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 .EXPORT_ALL_VARIABLES:
 
-HELM         := helm3
+HELM         := helm
 HELM_VERSION := $(shell $(HELM) version --short)
 HELM_SCRIPTS := $(CURDIR)/scripts
 

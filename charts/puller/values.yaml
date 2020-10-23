@@ -4,5 +4,6 @@
 
 puller:
   images:
-    - alpine
-  interval: 60
+    - busybox
+  interval: 60m
+  appVer: "1.16.0"
