@@ -5,4 +5,5 @@
 puller:
   images:
     - alpine
-  interval: 60
+    - busybox
+  interval: 60m
