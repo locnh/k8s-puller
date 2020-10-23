@@ -7,8 +7,8 @@ import (
 	"strings"
 	"sync"
 
+	cron "github.com/robfig/cron/v3"
 	log "github.com/sirupsen/logrus"
-	cron "gopkg.in/robfig/cron.v3"
 )
 
 var images []string

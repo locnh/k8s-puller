@@ -5,23 +5,6 @@ HELM         := helm
 HELM_VERSION := $(shell $(HELM) version --short)
 HELM_SCRIPTS := $(CURDIR)/scripts
 
-
-GOCMD        := go
-GOBUILD      := CGO_ENABLED=0 GOOS=linux $(GOCMD) build -a -installsuffix cgo
-GOCLEAN      := $(GOCMD) clean
-GOGET        := $(GOCMD) get
-BINARY_NAME  := puller
-LINTER       := golangci-lint
-
-clean:
-	rm $(BINARY_NAME)
-
-build:
-	$(GOBUILD) -o $(BINARY_NAME) -v
-
-lint:
-	$(LINTER) run
-
 .PHONY: release
 release: test package index
 
