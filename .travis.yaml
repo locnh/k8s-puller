@@ -17,13 +17,13 @@ jobs:
       - make lint build
     - stage: build docker image
       script:
-      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker build -t locnh/k8s-puller:devel .
       - docker images
-    - stage: push docker image (master)
-      if: branch = master
-      script:
-      - docker tag locnh/k8s-puller:devel locnh/k8s-puller:latest
-      - docker push $DOCKER_USERNAME/k8s-puller:latest
     - stage: test
       script: docker run --rm -e IMAGES=alpine,busybox -e INTERVAL=10s $DOCKER_USERNAME/k8s-puller:devel
+
+deploy:
+  provider: script
+  script: bash scripts/docker-push.sh
+  on:
+    tags: true
