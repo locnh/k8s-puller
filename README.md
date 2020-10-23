@@ -8,7 +8,7 @@ These are the Docker Hub autobuild images located [here](https://hub.docker.com/
 | Parameter | Description | Type | Default |
 |-----|-----|-----|-----|
 | `puller.images` | `List` of images to be pulled | `List` | `[alpine]` |
-| `puller.interval` | Time interval in minutes | `Int` | `60` |
+| `puller.interval` | Time interval | `String` | `60m` |
 
 ## Usage
 ### Create the settings file
@@ -19,7 +19,7 @@ puller:
   images:
     - alpine
     - busybox
-  interval: 5
+  interval: 5m
 ```
 These settings will tell the `puller` to pull the images [alpine](https://hub.docker.com/_/alpine/) and [busybox](https://hub.docker.com/_/busybox/) for every 5 minutes, because the tags was ommitted, then `latest` by default.
 
@@ -49,12 +49,12 @@ helm upgrade --install puller k8s-puller/puller -f values.yaml
 | Variable | Description |
 |-----|-----|
 | `IMAGES` | `List` of images to be pulled, separated by `,` |
-| `INTERVAL` | Time interval in minutes |
+| `INTERVAL` | Time interval, eg: `5m`, `1h` |
 
 #### Run a Docker container
 
 ```sh
-docker run --name puller -e IMAGES=busybox,alpine -e INTERVAL=60 -v /var/run/docker.sock:/var/run/docker.sock -d locnh/k8s-puller
+docker run --name puller -e IMAGES=busybox,alpine -e INTERVAL=60m -v /var/run/docker.sock:/var/run/docker.sock -d locnh/k8s-puller
 ```
 
 ## Contribute

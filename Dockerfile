@@ -1,9 +1,21 @@
+FROM golang:alpine as builder
+
+RUN mkdir /app
+ADD . /app
+WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+
+
 FROM alpinelinux/docker-cli
 
-RUN apk add --update --no-cache python3
-RUN python3 -m ensurepip
-RUN pip3 install --no-cache --upgrade pip schedule
+RUN mkdir /app
+WORKDIR /app/
 
-ADD puller.py /usr/local/bin/puller.py
+COPY --from=builder /app/main .
 
-ENTRYPOINT ["python3", "/usr/local/bin/puller.py"]
+CMD ["/app/main"]

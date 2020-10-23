@@ -15,12 +15,12 @@ spec:
     spec:
       containers:
       - name: {{ include "puller.fullname" . }}
-        image: locnh/k8s-puller:{{ .Values.puller.appVer }}
+        image: locnh/k8s-puller:{{ .Chart.AppVersion }}
         env:
         - name: IMAGES
           value: {{ join "," .Values.puller.images | quote }}
         - name: INTERVAL
-          value: {{ .Values.puller.interval | default 60 | quote }}
+          value: {{ .Values.puller.interval | quote }}
         volumeMounts:
         - name: docker
           mountPath: /var/run/docker.sock
