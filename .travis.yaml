@@ -1,0 +1,31 @@
+language: go
+
+service:
+  - docker
+
+go:
+  - 1.x
+
+before_install:
+  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.31.0
+  - golangci-lint --version
+  - curl -sSfL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+  - helm version
+
+jobs:
+  include:
+    - stage: build binary package
+      script:
+      - make lint build
+    - stage: build docker image
+      script:
+      - docker build -t locnh/k8s-puller:devel .
+      - docker images
+    - stage: test
+      script: docker run --rm -e IMAGES=alpine,busybox -e INTERVAL=10s $DOCKER_USERNAME/k8s-puller:devel
+
+deploy:
+  provider: script
+  script: bash scripts/docker-push.sh
+  on:
+    tags: true
