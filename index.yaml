@@ -3,9 +3,9 @@ entries:
   puller:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-10-23T19:42:49.48406+02:00"
+    created: "2020-10-23T19:55:13.435857+02:00"
     description: A Helm chart for Kubernetes images puller
-    digest: a687c3112ca39da1e3c0288b112895e16a196565e0a1b02d5c4ca3363c5af52b
+    digest: e1232bec82e417d00b3961c7cdc15f2f3afb952f60ac30a24ea27db4ebfcc8b5
     name: puller
     type: application
     urls:
@@ -13,7 +13,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-10-23T19:42:49.483796+02:00"
+    created: "2020-10-23T19:55:13.435353+02:00"
     description: A Helm chart for Kubernetes images puller
     digest: 35e5f981941429d17a7d31841a85117142d81e7a7d488d2382d33aff838f55f4
     name: puller
@@ -21,4 +21,4 @@ entries:
     urls:
     - https://locnh.github.io/k8s-puller/archives/puller-0.1.0.tgz
     version: 0.1.0
-generated: "2020-10-23T19:42:49.483356+02:00"
+generated: "2020-10-23T19:55:13.434364+02:00"

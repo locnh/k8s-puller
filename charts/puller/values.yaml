@@ -5,5 +5,5 @@
 puller:
   images:
     - busybox
-  interval: 60m
+  interval: 60
   appVer: "1.16.0"
