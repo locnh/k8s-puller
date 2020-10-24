@@ -5,7 +5,7 @@
 Features:
 
   - Rewrite in Golang [cron](https://godoc.org/github.com/robfig/cron)
-  - Interval is defined flexibly
+  - `Interval` is defined flexibly, if unit is missing, `Intertal` is set in `minutes`
   - Versions: Chart: `1.0.0`, App: `2.0.0`
 
 ## 0.1.1 (2020-10-23)

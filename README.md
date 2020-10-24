@@ -11,7 +11,7 @@ These are the Docker Hub autobuild images located [here](https://hub.docker.com/
 | Parameter | Description | Type | Default |
 |-----|-----|-----|-----|
 | `puller.images` | `List` of images to be pulled | `List` | `[alpine]` |
-| `puller.interval` | Time interval | `String` | `60m` |
+| `puller.interval` | Time interval | `String` | `5m` |
 
 ## Usage
 ### Create the settings file

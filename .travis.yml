@@ -1,4 +1,17 @@
 language: go
 
+go:
+  - 1.x
+
 before_install:
   - rm Makefile
+  - curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.31.0
+
+script:
+  - golangci-lint run
+  - go test ./... -v
+  - docker build -t locnh/k8s-puller .
+
+deploy:
+  provider: script
+  script: bash scripts/docker-push.sh
