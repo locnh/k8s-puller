@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 	"sync"
 
@@ -16,7 +17,7 @@ var images []string
 func main() {
 	log.SetFormatter(&log.JSONFormatter{})
 	args, hasValue := os.LookupEnv("IMAGES")
-	interval := getEnv("INTERVAL", "2m")
+	interval := getInterval("INTERVAL")
 
 	if !hasValue {
 		log.Error("Missing IMAGES")
@@ -42,11 +43,15 @@ func main() {
 	wg.Wait()
 }
 
-func getEnv(key, fallback string) string {
+func getInterval(key string) string {
 	if value, ok := os.LookupEnv(key); ok {
-		return value
+		intVal, err := strconv.Atoi(value)
+		if err != nil {
+			return value
+		}
+		return fmt.Sprintf("%vm", intVal)
 	}
-	return fallback
+	return "60m"
 }
 
 func pull() {

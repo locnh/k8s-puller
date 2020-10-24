@@ -5,6 +5,22 @@ HELM         := helm
 HELM_VERSION := $(shell $(HELM) version --short)
 HELM_SCRIPTS := $(CURDIR)/scripts
 
+GOCMD        := go
+GOBUILD      := $(GOCMD) build
+GOCLEAN      := $(GOCMD) clean
+GOGET        := $(GOCMD) get
+BINARY_NAME  := main
+LINTER       := golangci-lint
+
+lint:
+	$(LINTER) run
+
+build:
+	$(GOBUILD) -o $(BINARY_NAME) -v
+
+clean:
+	rm $(BINARY_NAME)
+
 .PHONY: release
 release: test package index
 
