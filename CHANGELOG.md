@@ -1,11 +1,18 @@
 # CHANGELOG.md
 
-## 1.0.0 (unreleased)
+## 1.0.1 (2020-10-24)
+
+Features:
+
+  - `Interval` unit will be set to `minutes` if missing
+  - Versions: Chart: `1.0.1`, App: `2.0.1`
+
+## 1.0.0 (2020-10-23)
 
 Features:
 
   - Rewrite in Golang [cron](https://godoc.org/github.com/robfig/cron)
-  - `Interval` is defined flexibly, if unit is missing, `Intertal` is set in `minutes`
+  - `Interval` is defined flexibly
   - Versions: Chart: `1.0.0`, App: `2.0.0`
 
 ## 0.1.1 (2020-10-23)
