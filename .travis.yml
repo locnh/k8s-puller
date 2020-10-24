@@ -17,8 +17,3 @@ deploy:
     script: bash scripts/docker-push.sh
     on:
       all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^(master|devel)$
-  - provider: script
-    script: bash scripts/docker-push.sh
-    on:
-      tags: true
