@@ -9,3 +9,4 @@ elif [ -z $TRAVIS_TAG ]; then
     docker push locnh/k8s-puller:$TRAVIS_TAG
 else
     docker push locnh/k8s-puller
+fi

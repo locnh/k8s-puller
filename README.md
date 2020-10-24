@@ -5,6 +5,7 @@ These are the Docker Hub autobuild images located [here](https://hub.docker.com/
 
 [![License](https://img.shields.io/github/license/locnh/k8s-puller)](/LICENSE)
 [![Docker](https://img.shields.io/docker/pulls/locnh/k8s-puller)](https://hub.docker.com/r/locnh/k8s-puller)
+[![Build Status](https://travis-ci.org/locnh/k8s-puller.svg?branch=master)](https://travis-ci.org/locnh/k8s-puller)
 
 ## Parameters
 
