@@ -13,5 +13,12 @@ script:
   - docker build -t locnh/k8s-puller .
 
 deploy:
-  provider: script
-  script: bash scripts/docker-push.sh
+  - provider: script
+    script: bash scripts/docker-push.sh
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(master|devel)$
+  - provider: script
+    script: bash scripts/docker-push.sh
+    on:
+      tags: true
