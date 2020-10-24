@@ -3,6 +3,9 @@ The puller periodically pulls image(s) to k8s cluster nodes to save the time of 
 
 These are the Docker Hub autobuild images located [here](https://hub.docker.com/r/locnh/k8s-puller/).
 
+[![License](https://img.shields.io/github/license/locnh/k8s-puller)](/LICENSE)
+[![Docker](https://img.shields.io/docker/pulls/locnh/k8s-puller)](https://hub.docker.com/r/locnh/k8s-puller)
+
 ## Parameters
 
 | Parameter | Description | Type | Default |
@@ -49,7 +52,7 @@ helm upgrade --install puller k8s-puller/puller -f values.yaml
 | Variable | Description |
 |-----|-----|
 | `IMAGES` | `List` of images to be pulled, separated by `,` |
-| `INTERVAL` | Time interval, eg: `5m`, `1h` |
+| `INTERVAL` | Time interval, eg: `30s`, `5m`, `1h`, ... [more](http://golang.org/pkg/time/#ParseDuration) |
 
 #### Run a Docker container
 
@@ -61,4 +64,4 @@ docker run --name puller -e IMAGES=busybox,alpine -e INTERVAL=60m -v /var/run/do
 1. Fork me
 2. Make changes
 3. Create pull request
-4. Grab a cup of coffee
+4. Grab a cup of tee and enjoy
