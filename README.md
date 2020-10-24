@@ -11,8 +11,8 @@ These are the Docker Hub autobuild images located [here](https://hub.docker.com/
 
 | Parameter | Description | Type | Default |
 |-----|-----|-----|-----|
-| `puller.images` | `List` of images to be pulled | `List` | `[alpine]` |
-| `puller.interval` | Time interval | `String` | `5m` |
+| `puller.images` | `List` of images to be pulled | `List` | `[busybox]` |
+| `puller.interval` | Time interval | `String` | `60m` |
 
 ## Usage
 ### Create the settings file
@@ -50,10 +50,10 @@ helm upgrade --install puller k8s-puller/puller -f values.yaml
 ### Use as Docker container
 #### Parameters as ENV variables
 
-| Variable | Description |
-|-----|-----|
-| `IMAGES` | `List` of images to be pulled, separated by `,` |
-| `INTERVAL` | Time interval, eg: `30s`, `5m`, `1h`, ... [more](http://golang.org/pkg/time/#ParseDuration) |
+| Variable | Description | Mandatory | Default |
+|-----|-----|-----|-----|
+| `IMAGES` | `List` of images to be pulled, separated by `,` | Yes | `null` |
+| `INTERVAL` | Time interval, eg: `30s`, `5m`, `1h`, ... [more](http://golang.org/pkg/time/#ParseDuration) | No | `60m` |
 
 #### Run a Docker container
 
