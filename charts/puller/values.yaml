@@ -6,3 +6,9 @@ puller:
   images:
     - busybox
   interval: 60m
+
+app:
+  image:
+    repository: locnh/k8s-puller
+  log:
+    json: false

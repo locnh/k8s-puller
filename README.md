@@ -54,6 +54,7 @@ helm upgrade --install puller k8s-puller/puller -f values.yaml
 |-----|-----|-----|-----|
 | `IMAGES` | `List` of images to be pulled, separated by `,` | Yes | `null` |
 | `INTERVAL` | Time interval, eg: `30s`, `5m`, `1h`, ... [more](http://golang.org/pkg/time/#ParseDuration) | No | `60m` |
+| `JSONLOG` | Toggle for JSON log format | No | `false` |
 
 #### Run a Docker container
 

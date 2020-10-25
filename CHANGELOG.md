@@ -1,11 +1,19 @@
 # CHANGELOG.md
 
+## 1.1.1 (2020-10-25)
+
+Features:
+
+  - Move configs to ConfigMap
+  - Log format can be set to plain text or json
+  - AppVer: `2.1.1`
+
 ## 1.0.1 (2020-10-24)
 
 Features:
 
   - `Interval` unit will be set to `minutes` if missing
-  - Versions: Chart: `1.0.1`, App: `2.0.1`
+  - AppVer: `2.0.1`
 
 ## 1.0.0 (2020-10-23)
 
@@ -13,7 +21,7 @@ Features:
 
   - Rewrite in Golang [cron](https://godoc.org/github.com/robfig/cron)
   - `Interval` is defined flexibly
-  - Versions: Chart: `1.0.0`, App: `2.0.0`
+  - AppVer `2.0.0`
 
 ## 0.1.1 (2020-10-23)
 

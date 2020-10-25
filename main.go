@@ -7,6 +7,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	cron "github.com/robfig/cron/v3"
 	log "github.com/sirupsen/logrus"
@@ -15,10 +16,12 @@ import (
 var images []string
 
 func main() {
-	log.SetFormatter(&log.JSONFormatter{})
-	args, hasValue := os.LookupEnv("IMAGES")
-	interval := getInterval("INTERVAL")
+	if jsonLog := getConfigLogFormat("JSONLOG"); jsonLog {
+		log.SetFormatter(&log.JSONFormatter{})
+	}
 
+	interval := getConfigInterval("INTERVAL")
+	args, hasValue := os.LookupEnv("IMAGES")
 	if !hasValue {
 		log.Error("Missing IMAGES")
 		os.Exit(1)
@@ -43,7 +46,7 @@ func main() {
 	wg.Wait()
 }
 
-func getInterval(key string) string {
+func getConfigInterval(key string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		intVal, err := strconv.Atoi(value)
 		if err != nil {
@@ -54,13 +57,25 @@ func getInterval(key string) string {
 	return "60m"
 }
 
+func getConfigLogFormat(key string) bool {
+	if value, ok := os.LookupEnv(key); ok {
+		if value == "true" || value == "1" {
+			return true
+		}
+	}
+	return false
+}
+
 func pull() {
 	for _, image := range images {
 		log.WithFields(log.Fields{"image": image}).Info("Start pulling image")
+		start := time.Now()
 		_, err := exec.Command("docker", "pull", fmt.Sprintf("%v", image)).Output()
 		if err != nil {
 			log.WithError(err)
 		}
-		log.WithFields(log.Fields{"image": image}).Info("Pull finished")
+		t := time.Now()
+		duration := t.Sub(start)
+		log.WithFields(log.Fields{"image": image, "duration": duration.Round(1 * time.Second)}).Info("Pull finished")
 	}
 }

@@ -15,12 +15,23 @@ spec:
     spec:
       containers:
       - name: {{ include "puller.fullname" . }}
-        image: locnh/k8s-puller:{{ .Chart.AppVersion }}
+        image: "{{ .Values.app.image.repository }}:{{ .Chart.AppVersion }}"
         env:
         - name: IMAGES
-          value: {{ join "," .Values.puller.images | quote }}
+          valueFrom:
+            configMapKeyRef:
+              name: puller-config
+              key: images
         - name: INTERVAL
-          value: {{ .Values.puller.interval | quote }}
+          valueFrom:
+            configMapKeyRef:
+              name: puller-config
+              key: interval
+        - name: JSONLOG
+          valueFrom:
+            configMapKeyRef:
+              name: puller-config
+              key: jsonlog
         volumeMounts:
         - name: docker
           mountPath: /var/run/docker.sock

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  images: {{ join "," .Values.puller.images | quote }}
+  interval: {{ .Values.puller.interval | quote }}
+  jsonlog: {{ .Values.app.log.json | quote }}
