@@ -13,6 +13,7 @@ These are the Docker Hub autobuild images located [here](https://hub.docker.com/
 |-----|-----|-----|-----|
 | `puller.images` | `List` of images to be pulled | `List` | `[busybox]` |
 | `puller.interval` | Time interval | `String` | `60m` |
+| `app.log.json` | Toggle for JSON logs | `bool` | `false` |
 
 ## Usage
 ### Create the settings file
