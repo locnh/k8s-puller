@@ -55,3 +55,56 @@ func TestGetJSONLog(t *testing.T) {
 		t.Errorf("Expect FALSE as JSONLOG is not set to \"1\" or \"true\"")
 	}
 }
+
+func TestGetImages(t *testing.T) {
+	// INPUT: Env IMAGES is not set"
+	// EXPECTED OUTPUT, ok is false
+	var expected []string
+	result, ok := getImages("IMAGES")
+	if ok {
+		t.Errorf("The \"ok\" flag should be \"false\"")
+	}
+	if !testEqual(result, expected) {
+		t.Errorf("Empty input test, Result is not as expected")
+	}
+
+	// INPUT: Env IMAGES is set to 1 image without tag "busybox"
+	os.Setenv("IMAGES", "busybox")
+	// EXPECTED OUTPUT
+	expected = []string{"busybox"}
+	if result, ok := getImages("IMAGES"); ok {
+		if !testEqual(result, expected) {
+			t.Errorf("Single image test, Result is not as expected")
+		}
+	} else {
+		t.Errorf("IMAGES un-parsable")
+	}
+
+	// INPUT: Env IMAGES is set to multiple images with tag "busybox:latest,alpine:latest"
+	os.Setenv("IMAGES", "busybox:latest,alpine:latest")
+	// EXPECTED OUTPUT
+	expected = []string{"busybox:latest", "alpine:latest"}
+	if result, ok := getImages("IMAGES"); ok {
+		if !testEqual(result, expected) {
+			t.Errorf("Multiple image with tag, Result is not as expected")
+		}
+	} else {
+		t.Errorf("IMAGES un-parsable")
+	}
+}
+
+func testEqual(a, b []string) bool {
+	// If one is nil, the other must also be nil.
+	if (a == nil) != (b == nil) {
+		return false
+	}
+	if len(a) != len(b) {
+		return false
+	}
+	for i := range a {
+		if a[i] != b[i] {
+			return false
+		}
+	}
+	return true
+}

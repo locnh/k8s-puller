@@ -14,6 +14,7 @@ import (
 )
 
 var images []string
+var isValid bool
 
 func main() {
 	if jsonLog := getConfigLogFormat("JSONLOG"); jsonLog {
@@ -21,13 +22,12 @@ func main() {
 	}
 
 	interval := getConfigInterval("INTERVAL")
-	args, hasValue := os.LookupEnv("IMAGES")
-	if !hasValue {
-		log.Error("Missing IMAGES")
+
+	images, isValid = getImages("IMAGES")
+	if !isValid {
+		log.Error("Missing Env IMAGES")
 		os.Exit(1)
 	}
-
-	images = strings.Split(args, ",")
 
 	for _, image := range images {
 		log.WithFields(log.Fields{"image": image}).Info("Added image to watched list")
@@ -47,10 +47,10 @@ func main() {
 }
 
 func getConfigInterval(key string) string {
-	if value, ok := os.LookupEnv(key); ok {
-		intVal, err := strconv.Atoi(value)
+	if result, ok := os.LookupEnv(key); ok {
+		intVal, err := strconv.Atoi(result)
 		if err != nil {
-			return value
+			return result
 		}
 		return fmt.Sprintf("%vm", intVal)
 	}
@@ -66,16 +66,25 @@ func getConfigLogFormat(key string) bool {
 	return false
 }
 
+func getImages(key string) (result []string, hasValue bool) {
+	if value, ok := os.LookupEnv(key); ok {
+		result = strings.Split(value, ",")
+		return result, true
+	}
+	return result, false
+}
+
 func pull() {
 	for _, image := range images {
 		log.WithFields(log.Fields{"image": image}).Info("Start pulling image")
 		start := time.Now()
 		_, err := exec.Command("docker", "pull", fmt.Sprintf("%v", image)).Output()
-		if err != nil {
-			log.WithError(err)
-		}
 		t := time.Now()
 		duration := t.Sub(start)
-		log.WithFields(log.Fields{"image": image, "duration": duration.Round(1 * time.Second)}).Info("Pull finished")
+		if err != nil {
+			log.WithError(err)
+		} else {
+			log.WithFields(log.Fields{"image": image, "duration": duration.Round(1 * time.Second)}).Info("Pull finished")
+		}
 	}
 }
