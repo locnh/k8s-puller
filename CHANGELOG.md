@@ -5,7 +5,7 @@
 Improvements:
 
   - Refactor code
-  - More unit tests
+  - Add unit tests
   - Fix minor bug
 
 Helm chart:
