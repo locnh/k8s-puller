@@ -4,8 +4,10 @@ The puller periodically pulls image(s) to k8s cluster nodes to save the time of 
 These are the Docker Hub autobuild images located [here](https://hub.docker.com/r/locnh/k8s-puller/).
 
 [![License](https://img.shields.io/github/license/locnh/k8s-puller)](/LICENSE)
-[![Docker](https://img.shields.io/docker/pulls/locnh/k8s-puller)](https://hub.docker.com/r/locnh/k8s-puller)
 [![Build Status](https://travis-ci.org/locnh/k8s-puller.svg?branch=master)](https://travis-ci.org/locnh/k8s-puller)
+[![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/locnh/k8s-puller?sort=semver)](/Dockerfile)
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/locnh/k8s-puller?sort=semver)](/Dockerfile)
+[![Docker](https://img.shields.io/docker/pulls/locnh/k8s-puller)](https://hub.docker.com/r/locnh/k8s-puller)
 
 ## Parameters
 
