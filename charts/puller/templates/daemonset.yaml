@@ -2,16 +2,16 @@ apiVersion: {{ include "puller.detectdsversion" . | default "apps/v1" }}
 kind: DaemonSet
 metadata:
   name: {{ include "puller.fullname" . }}
+  labels:
+{{ include "puller.labels" . | indent 4 }}
 spec:
   selector:
     matchLabels:
-      app: {{ include "puller.fullname" . }}
-{{ include "puller.labels" . | indent 6 }}
+{{ include "puller.selectorLabels" . | indent 6 }}
   template:
     metadata:
       labels:
-        app: {{ include "puller.fullname" . }}
-{{ include "puller.labels" . | indent 8 }}
+{{ include "puller.selectorLabels" . | indent 8 }}
     spec:
       containers:
       - name: {{ include "puller.fullname" . }}
