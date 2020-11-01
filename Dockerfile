@@ -8,14 +8,14 @@ COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o docker-puller .
 
 
-FROM alpinelinux/docker-cli
+FROM alpine
 
-RUN mkdir /app
-WORKDIR /app/
+RUN apk add --no-cache docker-cli
 
-COPY --from=builder /app/main .
+COPY scripts/docker-entrypoint.sh /entrypoint.sh
+COPY --from=builder /app/docker-puller /docker-puller
 
-CMD ["/app/main"]
+ENTRYPOINT [ "/entrypoint.sh"]

@@ -16,6 +16,11 @@ These are the Docker Hub autobuild images located [here](https://hub.docker.com/
 | `puller.images` | `List` of images to be pulled | `List` | `[busybox]` |
 | `puller.interval` | Time interval | `String` | `60m` |
 | `app.log.json` | Toggle for JSON logs | `bool` | `false` |
+| `registry.username` | Username to login to the registry | `String` | `""` |
+| `registry.password` | Username to login to the registry | `String` | `""` |
+| `registry.server` | [Server](https://docs.docker.com/engine/reference/commandline/login/#login-to-a-self-hosted-registry) address to login to the registry | `String` | `""` |
+
+
 
 ## Usage
 ### Create the settings file
@@ -47,6 +52,20 @@ Install chart with `values.yaml` in previous step.
 helm upgrade --install puller k8s-puller/puller -f values.yaml
 ```
 
+#### Install with docker registry login
+```sh
+helm upgrade --install puller k8s-puller/puller -f values.yaml
+  --set registry.username=USERNAME \
+  --set registry.password=PASSWORD
+```
+By default, docker hub will be used to login, if you want to login to an other registry, eg: `quay.io`, you need to set the `registry.server=quay.io`
+```sh
+helm upgrade --install puller k8s-puller/puller -f values.yaml
+  --set registry.username=USERNAME \
+  --set registry.password=PASSWORD \
+  --set registry.server=quay.io
+```
+
 **Note**: I use `upgrade --install` to install the chart if not installed, and upgrade the chart if the old version was installed.
 
 
@@ -56,8 +75,11 @@ helm upgrade --install puller k8s-puller/puller -f values.yaml
 | Variable | Description | Mandatory | Default |
 |-----|-----|-----|-----|
 | `IMAGES` | `List` of images to be pulled, separated by `,` | Yes | `null` |
-| `INTERVAL` | Time interval, eg: `30s`, `5m`, `1h`, ... [more](http://golang.org/pkg/time/#ParseDuration) | No | `60m` |
-| `JSONLOG` | Toggle for JSON log format | No | `false` |
+| `INTERVAL` | Time `interval`, eg: `30s`, `5m`, `1h`, ... [more](http://golang.org/pkg/time/#ParseDuration) | No | `60m` |
+| `JSONLOG` | Toggle for `JSON` log format | No | `false` |
+| `DOCKER_USERNAME` | `username` to login to docker registry | No | `""` |
+| `DOCKER_PASSWORD` | `password` to login to docker registry | No | `""` |
+| `DOCKER_SERVER` | [server](https://docs.docker.com/engine/reference/commandline/login/#login-to-a-self-hosted-registry) to login to docker registry | No | `""` |
 
 #### Run a Docker container
 

@@ -1,5 +1,16 @@
 # CHANGELOG.md
 
+## 2.2.1 (2020-11-01)
+
+Features:
+
+  - Docker Registry login
+  - Optimize docker image size
+
+Helm chart:
+
+  - version `1.2.1`
+
 ## 2.1.2 (2020-10-29)
 
 Improvements:

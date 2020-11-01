@@ -12,3 +12,8 @@ app:
     repository: locnh/k8s-puller
   log:
     json: false
+
+registry:
+  username: ""
+  password: ""
+  server: ""

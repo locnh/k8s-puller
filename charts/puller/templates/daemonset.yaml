@@ -20,18 +20,41 @@ spec:
         - name: IMAGES
           valueFrom:
             configMapKeyRef:
-              name: puller-config
+              name: {{ .Release.Name }}-config
               key: images
         - name: INTERVAL
           valueFrom:
             configMapKeyRef:
-              name: puller-config
+              name: {{ .Release.Name }}-config
               key: interval
+        {{- if .Values.app.log.json }}
         - name: JSONLOG
           valueFrom:
             configMapKeyRef:
-              name: puller-config
+              name: {{ .Release.Name }}-config
               key: jsonlog
+        {{- end }}
+        {{- if .Values.registry.server }}
+        - name: DOCKER_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Release.Name }}-config
+              key: server
+        {{- end }}
+        {{- if .Values.registry.username }}
+        - name: DOCKER_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-secret
+              key: username
+        {{- end }}
+        {{- if .Values.registry.password }}
+        - name: DOCKER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Release.Name }}-secret
+              key: password
+        {{- end }}
         volumeMounts:
         - name: docker
           mountPath: /var/run/docker.sock
