@@ -8,6 +8,7 @@ These are the Docker Hub autobuild images located [here](https://hub.docker.com/
 [![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/locnh/k8s-puller?sort=semver)](/Dockerfile)
 [![Docker Image Version (latest semver)](https://img.shields.io/docker/v/locnh/k8s-puller?sort=semver)](/Dockerfile)
 [![Docker](https://img.shields.io/docker/pulls/locnh/k8s-puller)](https://hub.docker.com/r/locnh/k8s-puller)
+[![codecov](https://codecov.io/gh/locnh/k8s-puller/branch/master/graph/badge.svg?token=22M1LNHEEM)](https://codecov.io/gh/locnh/k8s-puller)
 
 ## Parameters
 
