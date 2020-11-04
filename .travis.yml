@@ -9,8 +9,11 @@ before_install:
 
 script:
   - golangci-lint run
-  - go test ./... -v
+  - go test -race -coverprofile=coverage.txt -covermode=atomic -v ./...
   - docker build -t locnh/k8s-puller .
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 deploy:
   - provider: script
