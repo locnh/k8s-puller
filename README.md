@@ -1,4 +1,4 @@
-## k8s Images Puller
+# k8s Images Puller
 The puller periodically pulls image(s) to k8s cluster nodes to save the time of pulling images when launching new pods.
 
 These are the Docker Hub autobuild images located [here](https://hub.docker.com/r/locnh/k8s-puller/).
@@ -10,14 +10,14 @@ These are the Docker Hub autobuild images located [here](https://hub.docker.com/
 [![Docker](https://img.shields.io/docker/pulls/locnh/k8s-puller)](https://hub.docker.com/r/locnh/k8s-puller)
 [![codecov](https://codecov.io/gh/locnh/k8s-puller/branch/master/graph/badge.svg?token=22M1LNHEEM)](https://codecov.io/gh/locnh/k8s-puller)
 
-## Usage
-### Helm
+# Usage
+## ** Helm **
 
-**Note**: Helm chart has been moved to [HowDevOps/helm-charts](https://github.com/HowDevOps/helm-charts/tree/main/charts/k8s-puller) repository.
+Helm chart has been moved to [HowDevOps/helm-charts](https://github.com/HowDevOps/helm-charts/tree/main/charts/k8s-puller) repository.
 
 
-### Use as Docker container
-#### Parameters as ENV variables
+## ** Docker **
+### Parameters as ENV variables
 
 | Variable | Description | Mandatory | Default |
 |-----|-----|-----|-----|
@@ -28,7 +28,7 @@ These are the Docker Hub autobuild images located [here](https://hub.docker.com/
 | `DOCKER_PASSWORD` | `password` to login to docker registry | No | `""` |
 | `DOCKER_SERVER` | [server](https://docs.docker.com/engine/reference/commandline/login/#login-to-a-self-hosted-registry) to login to docker registry | No | `""` |
 
-#### Run a Docker container
+### Run a Docker container
 
 ```sh
 docker run --name puller -e IMAGES=busybox,alpine -e INTERVAL=60m -v /var/run/docker.sock:/var/run/docker.sock -d locnh/k8s-puller
