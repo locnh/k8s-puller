@@ -68,7 +68,7 @@ func getConfigLogFormat(key string) bool {
 
 func getImages(key string) (result []string, hasValue bool) {
 	if value, ok := os.LookupEnv(key); ok {
-		result = strings.Split(value, ",")
+		result = strings.Split(strings.Trim(value, ",:;'{}[]()"), ",")
 		return result, true
 	}
 	return result, false

@@ -1,5 +1,12 @@
 # CHANGELOG.md
 
+## 2.2.2 (2021-02-25)
+
+Features:
+
+  - Trim invalid characters
+  - Compatible with ArgoCD
+
 ## 2.2.1 (2020-11-01)
 
 Features:

@@ -91,6 +91,42 @@ func TestGetImages(t *testing.T) {
 	} else {
 		t.Errorf("IMAGES un-parsable")
 	}
+
+	// INPUT: Env IMAGES is set to multiple images with tag "[busybox:latest,alpine:latest,:;]"
+	os.Setenv("IMAGES", "[busybox:latest,alpine:latest,:;]")
+	// EXPECTED OUTPUT
+	expected = []string{"busybox:latest", "alpine:latest"}
+	if result, ok := getImages("IMAGES"); ok {
+		if !testEqual(result, expected) {
+			t.Errorf("Multiple image with tag, Result is not as expected")
+		}
+	} else {
+		t.Errorf("IMAGES un-parsable")
+	}
+
+	// INPUT: Env IMAGES is set to multiple images with tag "[busybox:latest,alpine:latest]"
+	os.Setenv("IMAGES", "[busybox:latest,alpine:latest]")
+	// EXPECTED OUTPUT
+	expected = []string{"busybox:latest", "alpine:latest"}
+	if result, ok := getImages("IMAGES"); ok {
+		if !testEqual(result, expected) {
+			t.Errorf("Multiple image with tag, Result is not as expected")
+		}
+	} else {
+		t.Errorf("IMAGES un-parsable")
+	}
+
+	// INPUT: Env IMAGES is set to multiple images with tag "{busybox:latest,alpine:latest}"
+	os.Setenv("IMAGES", "{busybox:latest,alpine:latest}")
+	// EXPECTED OUTPUT
+	expected = []string{"busybox:latest", "alpine:latest"}
+	if result, ok := getImages("IMAGES"); ok {
+		if !testEqual(result, expected) {
+			t.Errorf("Multiple image with tag, Result is not as expected")
+		}
+	} else {
+		t.Errorf("IMAGES un-parsable")
+	}
 }
 
 func testEqual(a, b []string) bool {
